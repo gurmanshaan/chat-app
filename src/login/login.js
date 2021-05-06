@@ -17,6 +17,7 @@ class LoginComponent extends React.Component {
         super();
         this.state = {
             email: null,
+            password: null,
             loginError: ''
         };
     }
