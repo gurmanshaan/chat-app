@@ -11,8 +11,6 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import NotificationImportant from '@material-ui/icons/NotificationImportant';
-import { RepeatRounded } from '@material-ui/icons';
-
 
 class ChatListComponent extends React.Component {
 
@@ -60,6 +58,12 @@ class ChatListComponent extends React.Component {
                                                     </React.Fragment>
                                                 }
                                             ></ListItemText>
+                                            {
+                                                _chat.receiverHasRead === false && !this.userIsSender(_chat) ?
+                                                    <ListItemIcon>
+                                                        <NotificationImportant className={classes.unreadMessage}></NotificationImportant>
+                                                    </ListItemIcon> : null
+                                            }
                                         </ListItem>
                                         <Divider>
 
@@ -94,6 +98,8 @@ class ChatListComponent extends React.Component {
     selectChat = (index) => {
         this.props.selectChatFn(index);
     }
+
+    userIsSender = (chat) => chat.messages[chat.messages.length - 1].sender === this.props.userEmail;
 }
 
 export default withStyles(styles)(ChatListComponent);
